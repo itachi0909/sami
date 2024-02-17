@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Reveal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #countdown {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Secret Password Revealed!</h1>
+    <div id="countdown"></div>
+    <div id="password" style="display:none;">18022005</div>
+    <script>
+        // Set the date for the password reveal
+        var revealDate = new Date("Feb 18, 2024 00:00:00 GMT+0530").getTime();
+
+        // Update the countdown every second
+        var countdownInterval = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = revealDate - now;
+
+            if (distance <= 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "Time's up!";
+                document.getElementById("password").style.display = "block";
+            } else {
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
